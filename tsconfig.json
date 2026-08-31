@@ -3,11 +3,14 @@
     "target": "es2022",
     "module": "es2022",
     "moduleResolution": "bundler",
-    "types": ["@cloudflare/workers-types"],
+    "types": [
+      "@cloudflare/workers-types",
+      "@cloudflare/vitest-pool-workers/types"
+    ],
     "strict": true,
     "skipLibCheck": true,
     "lib": ["es2022"],
     "noEmit": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "test/**/*"]
 }

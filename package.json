@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
@@ -18,8 +20,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.22.0",
     "@cloudflare/workers-types": "^5.20260831.1",
     "typescript": "^5.6.3",
+    "vitest": "^4.1.11",
     "wrangler": "^4.127.1"
   }
 }

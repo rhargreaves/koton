@@ -24,11 +24,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Typecheck Worker
-        run: npm run typecheck
-
-      - name: Dry-run Worker build
-        run: npx wrangler deploy --dry-run
-
-      - name: Validate Python client
-        run: python3 -m py_compile client/push-gua.py
+      - name: Run checks
+        run: make check
