@@ -1,5 +1,5 @@
 [Unit]
-Description=Push local GUA IPv6 addresses to Cloudflare KV for koton
+Description=Push local GUA IPv6 addresses to Cloudflare KV
 After=network-online.target
 Wants=network-online.target
 
