@@ -1,4 +1,5 @@
-# koton
+# koton 
+[![Build](https://github.com/rhargreaves/koton/actions/workflows/build.yml/badge.svg)](https://github.com/rhargreaves/koton/actions/workflows/build.yml)
 
 Out-of-band firewall watchdog powered by Cloudflare Workers (named after [K9 Koton](https://www.theguardian.com/books/gallery/2020/feb/02/hollywood-hounds-canine-film-stars-in-pictures#img-12)). Intended for monitoring that IPv6 GUAs are outbound only from private networks.
 
