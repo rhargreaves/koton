@@ -4,7 +4,12 @@ import { ProbeResult } from "./types";
 export function stateFromError(err: unknown): { state: ProbeResult["state"]; error?: string } {
   const msg = String((err as { message?: string })?.message || err);
   if (msg === "timeout") return { state: "timeout" };
-  if (msg.includes("refused") || msg.includes("reset") || msg.includes("closed")) {
+  if (
+    msg.includes("refused") ||
+    msg.includes("reset") ||
+    msg.includes("closed") ||
+    msg.includes("cannot connect")
+  ) {
     return { state: "closed" };
   }
   return { state: "error", error: msg };
