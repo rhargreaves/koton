@@ -33,9 +33,9 @@ sequenceDiagram
 
 | HTTP Status | State | Description |
 |:---:|:---|:---|
-| **`200`** | **Healthy** | All ports dropped or refused. |
-| **`541`** | **Firewall Open** | External TCP connection succeeded (uh oh). |
-| **`540`** | **No Targets** | Target list empty in KV. |
+| `200` | Healthy | All ports dropped or refused. |
+| `541` | Firewall Open | External TCP connection succeeded (uh oh). |
+| `540` | No Targets | Target list empty in KV. |
 
 ```json
 {
