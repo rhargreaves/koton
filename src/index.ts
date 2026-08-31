@@ -30,40 +30,31 @@ type Outcome = { state: "open" | "closed" | "error"; error?: string };
 const parsePorts = (raw?: string): number[] =>
   (raw || "")
     .split(",")
-    .map((p) => parseInt(p.trim(), 10))
+    .map((p) => parseInt(p))
     .filter((p) => Number.isInteger(p) && p > 0);
 
-function sleep(ms: number): Promise<"timeout"> {
-  return new Promise((resolve) => setTimeout(() => resolve("timeout"), ms));
-}
-
 async function probe(host: string, port: number, timeoutMs: number): Promise<Outcome> {
-  // connect() requires IPv6 literals to be wrapped in brackets [::1]
   const target = host.includes(":") && !host.startsWith("[") ? `[${host}]` : host;
-  let socket;
-  try {
-    socket = connect({ hostname: target, port });
-  } catch (error) {
-    return { state: "error", error: String(error) };
-  }
-
-  const outcome = await Promise.race([
-    socket.opened.then(
-      () => "open" as const,
-      (error) => ({ state: "error" as const, error: String(error) }),
-    ),
-    sleep(timeoutMs),
-  ]);
 
   try {
-    await socket.close();
-  } catch {
-    /* socket already closed */
+    const socket = connect({ hostname: target, port });
+    try {
+      await Promise.race([
+        socket.opened,
+        new Promise((_, reject) => {
+          const signal = AbortSignal.timeout(timeoutMs);
+          signal.addEventListener("abort", () => reject(new Error("timeout")), { once: true });
+        }),
+      ]);
+      return { state: "open" };
+    } finally {
+      socket.close().catch(() => {});
+    }
+  } catch (err: any) {
+    return err?.message === "timeout"
+      ? { state: "closed" }
+      : { state: "error", error: String(err) };
   }
-
-  if (outcome === "open") return { state: "open" };
-  if (outcome === "timeout") return { state: "closed" };
-  return outcome;
 }
 
 async function loadTargets(env: Env): Promise<{
@@ -152,7 +143,7 @@ async function runProbe(env: Env): Promise<{
     return { results: [], open: [], errors: [{ error: configError }], ipsLastPushed, configError };
   }
 
-  const timeoutMs = parseInt(env.PROBE_TIMEOUT_MS || "5000", 10);
+  const timeoutMs = parseInt(env.PROBE_TIMEOUT_MS);
   const tasks: Promise<ProbeResult>[] = [];
 
   for (const target of targets) {
