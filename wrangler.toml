@@ -1,0 +1,18 @@
+name = "koton"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+
+# Create your KV namespace with:
+#   npx wrangler kv namespace create KOTON
+# and paste the returned ID below:
+[[kv_namespaces]]
+binding = "KOTON"
+id = "<YOUR_KV_NAMESPACE_ID>"
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+[vars]
+PORT_LIST = "22,80,443"
+PROBE_TIMEOUT_MS = "5000"

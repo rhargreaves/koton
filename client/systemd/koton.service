@@ -1,0 +1,10 @@
+[Unit]
+Description=Push local GUA IPv6 addresses to Cloudflare KV for koton
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/opt/koton/env
+ExecStart=/usr/bin/python3 /opt/koton/push-gua.py
+User=root

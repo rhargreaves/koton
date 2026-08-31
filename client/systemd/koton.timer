@@ -1,0 +1,10 @@
+[Unit]
+Description=Run koton target push periodically
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=5min
+RandomizedDelaySec=30sec
+
+[Install]
+WantedBy=timers.target
