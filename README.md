@@ -29,7 +29,6 @@ sequenceDiagram
     end
 ```
 
----
 ## Status Codes
 
 | HTTP Status | State | Description |
@@ -48,8 +47,6 @@ sequenceDiagram
 }
 ```
 
----
-
 ## Quick Start
 
 ### 1. Worker Setup
@@ -65,8 +62,6 @@ Set the generated KV ID in `wrangler.toml`, then deploy:
 ```bash
 npm run deploy
 ```
-
----
 
 ### 2. Host Agent Setup
 
@@ -84,8 +79,6 @@ npm run deploy
    systemctl enable --now koton.timer
    ```
 
----
-
 ### 3. Monitoring
 
 Add an HTTP check (e.g. Uptime Kuma) against:
@@ -95,15 +88,11 @@ https://koton.<your-subdomain>.workers.dev/check
 
 Alert on anything other than `200`.
 
----
-
 ## Configuration
 
 Set in `wrangler.toml`:
 - `PORT_LIST`: Comma-separated TCP ports to probe (e.g. `"22,80,443"`).
 - `PROBE_TIMEOUT_MS`: Probe timeout in ms (default: `5000`).
-
----
 
 ## License
 
