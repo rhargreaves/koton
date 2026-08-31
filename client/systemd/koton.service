@@ -6,5 +6,5 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 EnvironmentFile=/opt/koton/env
-ExecStart=/usr/bin/python3 /opt/koton/push-gua.py
+ExecStart=/usr/bin/python3 /opt/koton/client/push-gua.py
 User=root
