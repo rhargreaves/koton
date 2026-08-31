@@ -4,6 +4,7 @@ export interface Env {
   KOTON: KVNamespace;
   PORT_LIST: string;
   PROBE_TIMEOUT_MS?: string;
+  AUTH_TOKEN?: string;
 }
 
 interface Target {
@@ -177,6 +178,13 @@ export default {
     const url = new URL(request.url);
     if (request.method !== "GET" || url.pathname !== "/check") {
       return new Response("Not found", { status: 404 });
+    }
+
+    if (env.AUTH_TOKEN) {
+      const auth = request.headers.get("Authorization");
+      if (auth !== `Bearer ${env.AUTH_TOKEN}`) {
+        return new Response("Unauthorized", { status: 401 });
+      }
     }
 
     const { results, open, errors, ipsLastPushed, configError } = await runProbe(env);

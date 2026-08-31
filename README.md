@@ -93,6 +93,7 @@ Alert on anything other than `200`.
 Set in `wrangler.toml`:
 - `PORT_LIST`: Comma-separated TCP ports to probe (e.g. `"22,80,443"`).
 - `PROBE_TIMEOUT_MS`: Probe timeout in ms (default: `5000`).
+- `AUTH_TOKEN`: Optional auth token for `GET /check` (`Authorization: Bearer <AUTH_TOKEN>`).
 
 ## License
 

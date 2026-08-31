@@ -16,3 +16,5 @@ head_sampling_rate = 1
 [vars]
 PORT_LIST = "22,80,443"
 PROBE_TIMEOUT_MS = "5000"
+# Optional: Bearer token for /check (Authorization: Bearer <AUTH_TOKEN>)
+# AUTH_TOKEN = ""
