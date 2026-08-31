@@ -1,6 +1,6 @@
 # koton
 
-Out-of-band firewall watchdog powered by Cloudflare Workers ([K9 Koton](https://www.theguardian.com/books/gallery/2020/feb/02/hollywood-hounds-canine-film-stars-in-pictures#img-12)). Intended for monitoring that IPv6 GUAs are outbound only from private networks.
+Out-of-band firewall watchdog powered by Cloudflare Workers (named after [K9 Koton](https://www.theguardian.com/books/gallery/2020/feb/02/hollywood-hounds-canine-film-stars-in-pictures#img-12)). Intended for monitoring that IPv6 GUAs are outbound only from private networks.
 
 ## Usage
 A worker probes public IPv6 addresses from Cloudflare (on GET `/check`) verifying that connection attempts are dropped or refused. A Python script pushes up GUAs to the worker from internal hosts periodically.
